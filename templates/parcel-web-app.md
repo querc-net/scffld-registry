@@ -4,6 +4,13 @@ props:
   name:
     type: string
     required: true
+  packageManager:
+    type: list
+    default: npm
+    options:
+      - npm
+      - yarn
+      - pnpm
   includeStyle:
     type: boolean
     default: true
@@ -16,9 +23,13 @@ props:
     type: boolean
     default: true
     description: Include Bootstrap Icons
+postInstallCommands:
+  - git init
+  - ${ @scffld packageManager } install
+  - ${ @scffld packageManager } run prettier
 postInstallMessage: |
   ___
-  # Your Parcel web app '<!-- @scffld name -->' has been created!
+  # Your web app '<!-- @scffld name -->' has been created!
   \
   To get started, run the following commands:
   ```sh
@@ -49,13 +60,15 @@ npx @querc/scffld@latest github:querc-net/scffld-registry/templates/parcel-web-a
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     /* @scffld-if includeStyle */
     "@parcel/transformer-sass": "^2",
     /* @scffld-endif */
-    "parcel": "^2"
+    "parcel": "^2",
+    "prettier": "^3"
   },
   "dependencies": {
     /* @scffld-if includeIcons */
