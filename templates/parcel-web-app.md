@@ -34,8 +34,8 @@ postInstallMessage: |
   To get started, run the following commands:
   ```sh
   cd <!-- @scffld-outputDirectory -->
-  npm i
-  npm start
+  <!-- @scffld packageManager --> install
+  <!-- @scffld packageManager --> start
   ```
 ---
 
