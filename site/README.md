@@ -1,5 +1,16 @@
-# Mantine Next Template
+# scffld registry site
 
-Get started with the template by clicking `Use this template` button on the top of the page.
+## Setup
 
-[Documentation](https://mantine.dev/guides/next/)
+Corepack is optional - see https://nodejs.org/api/corepack.html#corepack for details
+
+```sh
+corepack enable && corepack use pnpm@latest
+pnpm install
+```
+
+```sh
+pnpm dev
+pnpm build
+pnpm serve
+```

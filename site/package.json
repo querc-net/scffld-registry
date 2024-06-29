@@ -1,11 +1,13 @@
 {
-  "name": "mantine-minimal-next-template",
+  "name": "scffld-registry-site",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preserve": "pnpm build",
+    "serve": "serve -l 3333 ./dist",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,7 +26,8 @@
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "1.15.0",
     "postcss-simple-vars": "^7.0.1",
+    "serve": "^14.2.3",
     "typescript": "5.5.2"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
 }
