@@ -29,6 +29,7 @@ npx @querc/scffld@latest templates/parcel-react-app.md --outputDirectory=./test-
 ## Best practices
 
 - Include an `outputDirectory` param
+- Wrap template code blocks in `<!-- prettier-ignore-start -->` / `<!-- prettier-ignore-end -->` so they don't get formatted by Prettier
 - Include usage instructions, e.g:
 
 ```sh
