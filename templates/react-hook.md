@@ -9,6 +9,8 @@ postInstallMessage: |
   ___
   # Your React hook '<!-- @scffld name -->' has been created!
   \
+  <!-- @scffld-outputDirectory -->use<!-- @scffld-pascal name -->.ts
+  \
   You can use it like so:
   ```tsx
   use<!-- @scffld-pascal name -->(true);
@@ -24,7 +26,7 @@ npx @querc/scffld@latest reg:react-hook \
   --name="Your Hook Name"
 ```
 
-By default will output to `./src/hooks/YourHookName/` - to override add `--outputDirectory=./your/hook/path/`
+By default will output to `./src/hooks/useYourHookName.ts` - to override add `--outputDirectory=./your/hooks/path/`
 
 ## Template files
 

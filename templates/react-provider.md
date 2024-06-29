@@ -8,12 +8,14 @@ postInstallMessage: |
   ___
   # Your React provider '<!-- @scffld name -->' has been created!
   \
+  <!-- @scffld-outputDirectory --><!-- @scffld-pascal name -->Provider.tsx
+  \
   You can use it like so:
 
   ```tsx
   <<!-- @scffld-pascal name -->Provider>
      ...
-   </<!-- @scffld-pascal name -->Provider>
+  </<!-- @scffld-pascal name -->Provider>
   ```
 
   ```tsx
@@ -31,7 +33,7 @@ npx @querc/scffld@latest reg:react-provider \
   --name="Your Provider Name"
 ```
 
-By default will output to `./src/providers/YourProviderName/` - to override add `--outputDirectory=./your/provider/path/`
+By default will output to `./src/providers/YourProviderName.tsx` - to override add `--outputDirectory=./your/providers/path/`
 
 ## Template files
 
