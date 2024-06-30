@@ -17,12 +17,18 @@ export const Header: React.FC = () => {
           <Logo />
         </Link>
       </h1>
-      <nav>
+      <nav className="header__nav">
         <NavLink
           href="/templates"
           label="Templates"
           variant="light"
           active={path.startsWith('/templates')}
+        />
+        <NavLink
+          href="/docs"
+          label="Docs"
+          variant="light"
+          active={path.startsWith('/docs')}
         />
       </nav>
       <div className="header__tools">

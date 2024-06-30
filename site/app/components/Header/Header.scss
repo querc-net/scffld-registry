@@ -4,6 +4,12 @@
   gap: 2rem;
   padding: 0 var(--mantine-spacing-md);
 
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   &__tools {
     flex-grow: 1;
     display: flex;
