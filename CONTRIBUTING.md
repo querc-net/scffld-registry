@@ -36,3 +36,6 @@ npx @querc/scffld@latest templates/parcel-react-app.md --outputDirectory=./test-
 npx @querc/scffld@latest reg:parcel-react-app \
     --outputDirectory=./PROJECT_NAME/
 ```
+
+- Wrap usage details etc. in `<!-- @scffld-usage-start -->` / `<!-- @scffld-usage-end -->` to get them to display in the web interface
+- Name, description & keywords are currently unused, but may be exposed in the wb interface in the future

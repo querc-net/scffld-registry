@@ -1,5 +1,8 @@
 ---
 outputDirectory: ./src/components/
+name: React component
+description: Creates a basic React component
+keywords: [react, component]
 props:
   name:
     type: string
@@ -25,6 +28,8 @@ postInstallMessage: |
 
 # React component template
 
+<!-- @scffld-usage-start -->
+
 Highly opinionated template for creating React components
 
 ## Usage
@@ -41,6 +46,8 @@ To see all available options:
 ```sh
 npx @querc/scffld@latest reg:react-component --help
 ```
+
+<!-- @scffld-usage-end -->
 
 ## Template files
 

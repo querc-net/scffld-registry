@@ -1,5 +1,8 @@
 ---
 outputDirectory: ./src/providers/
+name: React provider
+description: Creates a basic React provider
+keywords: [react, provider]
 props:
   name:
     type: string
@@ -26,6 +29,8 @@ postInstallMessage: |
 
 # React provider template
 
+<!-- @scffld-usage-start -->
+
 ## Usage
 
 ```sh
@@ -34,6 +39,8 @@ npx @querc/scffld@latest reg:react-provider \
 ```
 
 By default will output to `./src/providers/YourProviderName.tsx` - to override add `--outputDirectory=./your/providers/path/`
+
+<!-- @scffld-usage-end -->
 
 ## Template files
 

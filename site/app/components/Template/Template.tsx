@@ -3,6 +3,7 @@ import { Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
 import { GithubIcon } from '@mantinex/dev-icons';
 import * as scffld from '@querc/scffld';
+import markdownit from 'markdown-it';
 
 import './Template.scss';
 
@@ -15,10 +16,29 @@ export type TemplateProps = {
 export const Template: React.FC<TemplateProps> = (props) => {
   const { name, template, params } = props;
 
-  // TODO: extract usage command from template
-  // Something like:
-  // ```sh { usage }
   const usageCommand = `npx @querc/scffld reg:${name}`;
+  let hasUsage = false;
+
+  const usageStartComment = '<!-- @scffld-usage-start -->';
+  const usageEndComment = '<!-- @scffld-usage-end -->';
+  const usageStartCommentPosition = template.indexOf(usageStartComment);
+  const usageEndCommentPosition = template.indexOf(usageEndComment);
+  let usageMarkup = '';
+
+  if (usageStartCommentPosition > 0 && usageEndCommentPosition > 0) {
+    hasUsage = true;
+    const usageMarkdown = template
+      .substring(usageStartCommentPosition, usageEndCommentPosition)
+      .replace(usageStartComment, '')
+      .replace(usageEndComment, '')
+      .replace('### ', '#### ')
+      .replace('## ', '### ')
+      .replace('# ', '## ');
+
+    const md = markdownit();
+    usageMarkup = md.render(usageMarkdown);
+    // TODO: Need to replace code blocks with <CodeHighlight>
+  }
 
   const postInstallCode = [];
 
@@ -48,8 +68,14 @@ export const Template: React.FC<TemplateProps> = (props) => {
       </Tabs.List>
 
       <Tabs.Panel value="overview">
-        <h3>Usage</h3>
-        <CodeHighlight code={usageCommand} language="sh" />
+        {!hasUsage && <h3>Usage</h3>}
+        {!hasUsage && <CodeHighlight code={usageCommand} language="sh" />}
+        {hasUsage && (
+          <div
+            className="usage"
+            dangerouslySetInnerHTML={{ __html: usageMarkup }}
+          ></div>
+        )}
       </Tabs.Panel>
       <Tabs.Panel value="params">
         {params.outputDirectory && (

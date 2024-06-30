@@ -1,5 +1,8 @@
 ---
 outputDirectory: ./src/hooks/
+name: React hook
+description: Creates a basic React hook
+keywords: [react, hook]
 props:
   name:
     type: string
@@ -19,6 +22,8 @@ postInstallMessage: |
 
 # React hook template
 
+<!-- @scffld-usage-start -->
+
 ## Usage
 
 ```sh
@@ -27,6 +32,8 @@ npx @querc/scffld@latest reg:react-hook \
 ```
 
 By default will output to `./src/hooks/useYourHookName.ts` - to override add `--outputDirectory=./your/hooks/path/`
+
+<!-- @scffld-usage-end -->
 
 ## Template files
 

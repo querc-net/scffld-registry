@@ -1,5 +1,8 @@
 ---
 outputDirectory: ./src/
+name: Parcel React app
+description: Creates a basic React / Parcel app
+keywords: [react, parcel, app]
 props:
   name:
     type: string
@@ -51,6 +54,8 @@ postInstallMessage: |
 
 # Parcel React app template
 
+<!-- @scffld-usage-start -->
+
 Highly opinionated template for creating a React app using Parcel.js
 
 ## Usage
@@ -66,6 +71,8 @@ To see all available options:
 ```sh
 npx @querc/scffld@latest reg:parcel-react-app --help
 ```
+
+<!-- @scffld-usage-end -->
 
 ## Template files
 
