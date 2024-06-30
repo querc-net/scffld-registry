@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">
-          <PlausibleProvider domain="scffld.dev">
+          <PlausibleProvider domain="scffld.dev" trackOutboundLinks={true}>
             <Header />
             <Container fluid>{children}</Container>
           </PlausibleProvider>
