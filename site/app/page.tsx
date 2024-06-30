@@ -49,6 +49,16 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
+            <div className="attribution">
+              Photo by{' '}
+              <a href="https://unsplash.com/@christopher__burns?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                Christopher Burns
+              </a>{' '}
+              on{' '}
+              <a href="https://unsplash.com/photos/person-holding-tool-during-daytime-8KfCR12oeUM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+                Unsplash
+              </a>
+            </div>
           </div>
         </Container>
       </div>
