@@ -5,6 +5,7 @@ const nextConfig = {
   // output: 'standalone'
   output: 'export',
   distDir: 'dist',
+  basePath: '/scffld-registry',
 };
 
 export default nextConfig;

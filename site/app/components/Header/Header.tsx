@@ -1,18 +1,19 @@
 'use client';
 
-import { useMantineColorScheme, Group, Button } from '@mantine/core';
+import { Group } from '@mantine/core';
+import Link from 'next/link';
+
+import './Header.scss';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 export const Header: React.FC = () => {
-  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
-
   return (
-    <header>
-      <h1>scffld | Registry</h1>
+    <header className="header">
+      <h1>
+        <Link href="/">scffld | Registry</Link>
+      </h1>
       <Group>
-        <Button onClick={() => setColorScheme('light')}>Light</Button>
-        <Button onClick={() => setColorScheme('dark')}>Dark</Button>
-        <Button onClick={() => setColorScheme('auto')}>Auto</Button>
-        <Button onClick={clearColorScheme}>Clear</Button>
+        <ThemeToggle />
       </Group>
     </header>
   );

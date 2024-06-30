@@ -1,8 +1,11 @@
-import '@mantine/core/styles.css';
 import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript, Container } from '@mantine/core';
 import { theme } from '../theme';
 import { Header } from './components/Header/Header';
+
+import '@mantine/core/styles.css';
+import '@mantine/code-highlight/styles.css';
+import './layout.scss';
 
 export const metadata = {
   title: 'scffld registry',
@@ -22,7 +25,7 @@ export default function RootLayout({ children }: { children: any }) {
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <Header />
-          {children}
+          <Container fluid>{children}</Container>
         </MantineProvider>
       </body>
     </html>
