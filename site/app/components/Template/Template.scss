@@ -1,6 +1,33 @@
-.template-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
+.template {
+  .template-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .description {
+    font-size: 1.125rem;
+  }
+
+  .metadata {
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+
+  .keywords,
+  .authors,
+  .contributors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li:not(:last-of-type)::after {
+      content: ',';
+    }
+  }
 }

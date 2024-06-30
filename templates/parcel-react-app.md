@@ -3,6 +3,7 @@ outputDirectory: ./src/
 name: Parcel React app
 description: Creates a basic React / Parcel app
 keywords: [react, parcel, app]
+authors: [lindsayevans]
 props:
   name:
     type: string

@@ -3,6 +3,7 @@ outputDirectory: ./src/providers/
 name: React provider
 description: Creates a basic React provider
 keywords: [react, provider]
+authors: [lindsayevans]
 props:
   name:
     type: string

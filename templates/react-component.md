@@ -3,6 +3,7 @@ outputDirectory: ./src/components/
 name: React component
 description: Creates a basic React component
 keywords: [react, component]
+authors: [lindsayevans]
 props:
   name:
     type: string

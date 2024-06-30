@@ -3,6 +3,7 @@ outputDirectory: ./src/hooks/
 name: React hook
 description: Creates a basic React hook
 keywords: [react, hook]
+authors: [lindsayevans]
 props:
   name:
     type: string

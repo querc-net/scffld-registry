@@ -5,6 +5,8 @@ import { getTemplates } from '../getTemplates';
 import { getTemplate } from './getTemplate';
 import { Template } from '../../components/Template/Template';
 
+import './page.scss';
+
 export async function generateStaticParams() {
   const templates = await getTemplates();
 
@@ -24,7 +26,13 @@ export default async function Page({ params }: { params: { name: string } }) {
 
   return (
     <main>
-      <h2>{params.name}</h2>
+      {!templateParams.name && <h2>{params.name}</h2>}
+      {templateParams.name && (
+        <h2 className="template-name">
+          {templateParams.name}
+          <small>{params.name}</small>
+        </h2>
+      )}
       {/* <pre>{template}</pre> */}
       <Template
         name={params.name}

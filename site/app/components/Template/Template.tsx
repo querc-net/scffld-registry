@@ -1,5 +1,5 @@
 'use client';
-import { Table, Tabs } from '@mantine/core';
+import { Divider, Grid, Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
 import { GithubIcon } from '@mantinex/dev-icons';
 import * as scffld from '@querc/scffld';
@@ -60,112 +60,173 @@ export const Template: React.FC<TemplateProps> = (props) => {
   const codeUrl = `https://github.com/querc-net/scffld-registry/blob/main/templates/${name}.md`;
 
   return (
-    <Tabs defaultValue="overview">
-      <Tabs.List>
-        <Tabs.Tab value="overview">Overview</Tabs.Tab>
-        <Tabs.Tab value="params">Params</Tabs.Tab>
-        <Tabs.Tab value="raw">Raw template</Tabs.Tab>
-      </Tabs.List>
+    <div className="template">
+      <Grid>
+        <Grid.Col span={9}>
+          <Tabs defaultValue="overview">
+            <Tabs.List>
+              <Tabs.Tab value="overview">Overview</Tabs.Tab>
+              <Tabs.Tab value="params">Params</Tabs.Tab>
+              <Tabs.Tab value="raw">Raw template</Tabs.Tab>
+            </Tabs.List>
 
-      <Tabs.Panel value="overview">
-        {!hasUsage && <h3>Usage</h3>}
-        {!hasUsage && <CodeHighlight code={usageCommand} language="sh" />}
-        {hasUsage && (
-          <div
-            className="usage"
-            dangerouslySetInnerHTML={{ __html: usageMarkup }}
-          ></div>
-        )}
-      </Tabs.Panel>
-      <Tabs.Panel value="params">
-        {params.outputDirectory && (
-          <>
-            <h3>Default output directory</h3>
-            <pre>{params.outputDirectory}</pre>
-          </>
-        )}
+            <Tabs.Panel value="overview">
+              {params.description && (
+                <>
+                  <p className="description">{params.description}</p>
+                  <Divider my="md" />
+                </>
+              )}
 
-        {postInstallCode.length > 0 && (
-          <>
-            <h3>Post install</h3>
-            <p>
-              <CodeHighlightTabs
-                withExpandButton
-                defaultExpanded={false}
-                withCopyButton={false}
-                code={postInstallCode}
-              />
-            </p>
-          </>
-        )}
+              {!hasUsage && <h3>Usage</h3>}
+              {!hasUsage && <CodeHighlight code={usageCommand} language="sh" />}
+              {hasUsage && (
+                <div
+                  className="usage"
+                  dangerouslySetInnerHTML={{ __html: usageMarkup }}
+                ></div>
+              )}
+            </Tabs.Panel>
+            <Tabs.Panel value="params">
+              {params.outputDirectory && (
+                <>
+                  <h3>Default output directory</h3>
+                  <pre>{params.outputDirectory}</pre>
+                </>
+              )}
 
-        {/* {params.postInstallCommands && (
-          <p>
-            <b>Post install commands:</b>
+              {postInstallCode.length > 0 && (
+                <>
+                  <h3>Post install</h3>
+                  <p>
+                    <CodeHighlightTabs
+                      withExpandButton
+                      defaultExpanded={false}
+                      withCopyButton={false}
+                      code={postInstallCode}
+                    />
+                  </p>
+                </>
+              )}
 
-            <CodeHighlight
-              code={params.postInstallCommands.join('\n')}
-              language="sh"
-              withCopyButton={false}
-            />
-          </p>
-        )} */}
-
-        <h3>Props</h3>
-        {params.props && (
-          <Table stickyHeader striped highlightOnHover withRowBorders={false}>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>Name</Table.Th>
-                <Table.Th>Description</Table.Th>
-                <Table.Th>Default value</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>
-              {params.props &&
-                Object.keys(params.props).map((prop) => (
-                  <Table.Tr key={prop}>
-                    <Table.Th>
-                      {prop}
-                      {params.props && params.props[prop].required && (
-                        <b style={{ color: 'red' }}> *</b>
-                      )}
-                      <br />
-                      <small style={{ color: 'gray' }}>
-                        {params.props && params.props[prop].type}
-                        {params.props && params.props[prop].type === 'list' && (
-                          <>
-                            : <i>{params.props[prop].options?.join(', ')}</i>
-                          </>
-                        )}
-                      </small>
-                    </Table.Th>
-                    <Table.Td>
-                      <p>{params.props && params.props[prop].description}</p>
-                      {/* <pre>
+              <h3>Props</h3>
+              {params.props && (
+                <Table
+                  stickyHeader
+                  striped
+                  highlightOnHover
+                  withRowBorders={false}
+                >
+                  <Table.Thead>
+                    <Table.Tr>
+                      <Table.Th>Name</Table.Th>
+                      <Table.Th>Description</Table.Th>
+                      <Table.Th>Default value</Table.Th>
+                    </Table.Tr>
+                  </Table.Thead>
+                  <Table.Tbody>
+                    {params.props &&
+                      Object.keys(params.props).map((prop) => (
+                        <Table.Tr key={prop}>
+                          <Table.Th>
+                            {prop}
+                            {params.props && params.props[prop].required && (
+                              <b style={{ color: 'red' }}> *</b>
+                            )}
+                            <br />
+                            <small style={{ color: 'gray' }}>
+                              {params.props && params.props[prop].type}
+                              {params.props &&
+                                params.props[prop].type === 'list' && (
+                                  <>
+                                    :{' '}
+                                    <i>
+                                      {params.props[prop].options?.join(', ')}
+                                    </i>
+                                  </>
+                                )}
+                            </small>
+                          </Table.Th>
+                          <Table.Td>
+                            <p>
+                              {params.props && params.props[prop].description}
+                            </p>
+                            {/* <pre>
                         {params.props
                           ? JSON.stringify(params.props[prop], null, 2)
                           : ''}
                       </pre> */}
-                    </Table.Td>
-                    <Table.Td>
-                      <p>
-                        {params.props && params.props[prop].default?.toString()}
-                      </p>
-                    </Table.Td>
-                  </Table.Tr>
+                          </Table.Td>
+                          <Table.Td>
+                            <p>
+                              {params.props &&
+                                params.props[prop].default?.toString()}
+                            </p>
+                          </Table.Td>
+                        </Table.Tr>
+                      ))}
+                  </Table.Tbody>
+                </Table>
+              )}
+            </Tabs.Panel>
+            <Tabs.Panel value="raw">
+              <a
+                className="template-link"
+                href={codeUrl}
+                target="_blank"
+                rel="external"
+              >
+                <GithubIcon size={24} />
+                <code>{codeUrl}</code>
+              </a>
+              <CodeHighlight code={template} language="markdown" />
+            </Tabs.Panel>
+          </Tabs>
+        </Grid.Col>
+        <Grid.Col span={3} className="metadata">
+          {params.keywords && (
+            <>
+              <h3>Keywords</h3>
+              <ul className="keywords">
+                {params.keywords.map((keyword) => (
+                  <li key={keyword}>{keyword}</li>
                 ))}
-            </Table.Tbody>
-          </Table>
-        )}
-      </Tabs.Panel>
-      <Tabs.Panel value="raw">
-        <a className="template-link" href={codeUrl} target="_blank">
-          <GithubIcon size={24} />
-          <code>{codeUrl}</code>
-        </a>
-        <CodeHighlight code={template} language="markdown" />
-      </Tabs.Panel>
-    </Tabs>
+              </ul>
+            </>
+          )}
+          {params.authors && (
+            <>
+              <h3>Author{params.authors.length > 1 && 's'}</h3>
+              <ul className="authors">
+                {params.authors.map((author) => (
+                  <li key={author}>
+                    <a href={`https://github.com/${author}`} rel="external">
+                      {author}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {params.contributors && (
+            <>
+              <h3>Contributors</h3>
+              <ul className="contributors">
+                {params.contributors.map((contributor) => (
+                  <li key={contributor}>
+                    <a
+                      href={`https://github.com/${contributor}`}
+                      rel="external"
+                    >
+                      {contributor}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </Grid.Col>
+      </Grid>
+    </div>
   );
 };
