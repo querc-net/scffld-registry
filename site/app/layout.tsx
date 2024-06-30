@@ -1,5 +1,7 @@
 import React from 'react';
 import { MantineProvider, ColorSchemeScript, Container } from '@mantine/core';
+import PlausibleProvider from 'next-plausible';
+
 import { theme } from '../theme';
 import { Header } from './components/Header/Header';
 
@@ -24,8 +26,10 @@ export default function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">
-          <Header />
-          <Container fluid>{children}</Container>
+          <PlausibleProvider domain="scffld.dev">
+            <Header />
+            <Container fluid>{children}</Container>
+          </PlausibleProvider>
         </MantineProvider>
       </body>
     </html>
