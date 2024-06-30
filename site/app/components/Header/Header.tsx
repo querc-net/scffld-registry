@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 import './Header.scss';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
-import { Logo } from '../../../src/components/src/components/Logo/Logo';
 import { usePathname } from 'next/navigation';
+import { Logo } from '../Logo/Logo';
 
 export const Header: React.FC = () => {
   const path = usePathname();
