@@ -1,0 +1,40 @@
+{
+  "name": "scffld-registry-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preserve": "pnpm build",
+    "serve": "serve -l 3333 ./dist",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mantine/code-highlight": "^7.11.0",
+    "@mantine/core": "7.11.0",
+    "@mantine/hooks": "7.11.0",
+    "@mantinex/dev-icons": "^1.0.2",
+    "@querc/scffld": "^1.4.0",
+    "clsx": "^2.1.1",
+    "globby": "^14.0.1",
+    "next": "14.2.4",
+    "react": "18.3.1",
+    "react-bootstrap-icons": "^1.11.4",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.8",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.4",
+    "postcss": "^8.4.38",
+    "postcss-preset-mantine": "1.15.0",
+    "postcss-simple-vars": "^7.0.1",
+    "sass": "^1.77.6",
+    "serve": "^14.2.3",
+    "typescript": "5.5.2"
+  },
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
+}
