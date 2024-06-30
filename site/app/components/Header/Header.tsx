@@ -1,13 +1,15 @@
 'use client';
 
-import { Group } from '@mantine/core';
+import { Group, NavLink } from '@mantine/core';
 import Link from 'next/link';
 
 import './Header.scss';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import { Logo } from '../../../src/components/src/components/Logo/Logo';
+import { usePathname } from 'next/navigation';
 
 export const Header: React.FC = () => {
+  const path = usePathname();
   return (
     <header className="header">
       <h1>
@@ -15,9 +17,17 @@ export const Header: React.FC = () => {
           <Logo />
         </Link>
       </h1>
-      <Group>
+      <nav>
+        <NavLink
+          href="/templates"
+          label="Templates"
+          variant="light"
+          active={path.startsWith('/templates')}
+        />
+      </nav>
+      <div className="header__tools">
         <ThemeToggle />
-      </Group>
+      </div>
     </header>
   );
 };
