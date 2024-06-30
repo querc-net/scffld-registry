@@ -43,8 +43,9 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
           cache: pnpm
+          cache-dependency-path: '**/pnpm-lock.yaml'
       - run: corepack enable
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Setup Pages
         uses: actions/configure-pages@v5
