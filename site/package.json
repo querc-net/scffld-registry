@@ -8,7 +8,10 @@
     "start": "next start",
     "preserve": "pnpm build",
     "serve": "serve -l 3333 ./dist",
-    "lint": "next lint"
+    "lint": "next lint",
+    "g:component": "scffld reg:react-component --includeTests=false --outputDirectory=./src/components/",
+    "g:provider": "scffld reg:react-provider --includeTests=false --outputDirectory=./src/providers/",
+    "g:hook": "scffld reg:react-hook --includeTests=false --outputDirectory=./src/hooks/"
   },
   "dependencies": {
     "@mantine/code-highlight": "^7.11.0",

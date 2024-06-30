@@ -14,3 +14,7 @@ pnpm dev
 pnpm build
 pnpm serve
 ```
+
+```sh
+pnpm g:component --name="My Thing"
+```
