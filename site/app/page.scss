@@ -2,7 +2,8 @@ $mantine-breakpoint-md: 62em;
 
 .hero {
   position: relative;
-  margin: 0 calc(var(--mantine-spacing-md) * -1);
+  margin: calc(var(--mantine-spacing-md) * -1)
+    calc((var(--mantine-spacing-md) * 2) * -1) 0;
   background-color: #11284b;
   background-size: cover;
   background-position: center;
