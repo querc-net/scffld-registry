@@ -52,7 +52,7 @@ npx @querc/scffld@latest reg:react-component --help
 
 ## Template files
 
-```scss { filename: 'src/components/${ @scffld-pascal name }/${ @scffld-pascal name }.scss', condition: includeStyle }
+```scss { filename: '${ @scffld-pascal name }/${ @scffld-pascal name }.scss', condition: includeStyle }
 ./* @scffld-kebab name */ {
   &--active {
     outline: 1px solid salmon;
@@ -64,7 +64,7 @@ npx @querc/scffld@latest reg:react-component --help
 }
 ```
 
-```tsx { filename: 'src/components/${ @scffld-pascal name }/${ @scffld-pascal name }.test.tsx', condition: includeTests }
+```tsx { filename: '${ @scffld-pascal name }/${ @scffld-pascal name }.test.tsx', condition: includeTests }
 /**
  * @jest-environment jsdom
  */
@@ -95,7 +95,7 @@ describe('/* @scffld-pascal name */ component', () => {
 });
 ```
 
-```tsx { filename: 'src/components/${ @scffld-pascal name }/${ @scffld-pascal name }.tsx' }
+```tsx { filename: '${ @scffld-pascal name }/${ @scffld-pascal name }.tsx' }
 import React, { useState } from 'react';
 import cx from 'clsx';
 
