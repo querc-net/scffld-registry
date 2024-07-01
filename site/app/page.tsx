@@ -21,10 +21,13 @@ export default function HomePage() {
                 your code generation &amp; scaffolding
               </Title>
 
-              {/* <Text className="description" mt={30}>
-                Simple code scaffolding tool utilising a single Markdown file to
-                define templates & properties.
-              </Text> */}
+              <Text className="description" mt={30}>
+                A curated collection of templates for{' '}
+                <a href="https://www.npmjs.com/package/@querc/scffld">scffld</a>
+                .<br />
+                Get the boilerplate out of the way &amp; focus on the things
+                that matter.
+              </Text>
               <div className="ctas">
                 <Button
                   component="a"
