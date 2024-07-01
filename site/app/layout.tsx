@@ -8,7 +8,7 @@ import './layout.scss';
 import { Shell } from './components/Shell/Shell';
 
 export const metadata = {
-  title: 'scffld registry',
+  title: 'scffld',
 };
 
 export default function RootLayout({ children }: { children: any }) {
