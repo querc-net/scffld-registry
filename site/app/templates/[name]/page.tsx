@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import * as scffld from '@querc/scffld';
+import * as scffld from '@scffld/cli';
 
 import { getTemplates } from '../getTemplates';
 import { getTemplate } from './getTemplate';

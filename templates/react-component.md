@@ -36,7 +36,7 @@ Highly opinionated template for creating React components
 ## Usage
 
 ```sh
-npx @querc/scffld@latest reg:react-component \
+npx @scffld/cli@latest reg:react-component \
   --name="Your Component Name"
 ```
 
@@ -45,7 +45,7 @@ By default will output to `./src/components/YourComponentName/` - to override ad
 To see all available options:
 
 ```sh
-npx @querc/scffld@latest reg:react-component --help
+npx @scffld/cli@latest reg:react-component --help
 ```
 
 <!-- @scffld-usage-end -->

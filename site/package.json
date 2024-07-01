@@ -18,7 +18,7 @@
     "@mantine/core": "7.11.0",
     "@mantine/hooks": "7.11.0",
     "@mantinex/dev-icons": "^1.0.2",
-    "@querc/scffld": "^1.4.1",
+    "@scffld/cli": "1.6.1",
     "@tabler/icons-react": "^3.7.0",
     "clsx": "^2.1.1",
     "globby": "^14.0.1",

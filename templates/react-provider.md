@@ -35,7 +35,7 @@ postInstallMessage: |
 ## Usage
 
 ```sh
-npx @querc/scffld@latest reg:react-provider \
+npx @scffld/cli@latest reg:react-provider \
   --name="Your Provider Name"
 ```
 

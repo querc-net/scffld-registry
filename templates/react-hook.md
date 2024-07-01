@@ -28,7 +28,7 @@ postInstallMessage: |
 ## Usage
 
 ```sh
-npx @querc/scffld@latest reg:react-hook \
+npx @scffld/cli@latest reg:react-hook \
   --name="Your Hook Name"
 ```
 

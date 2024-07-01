@@ -62,7 +62,7 @@ Highly opinionated template for creating a React app using Parcel.js
 ## Usage
 
 ```sh
-npx @querc/scffld@latest reg:parcel-react-app \
+npx @scffld/cli@latest reg:parcel-react-app \
   --name="Your Project Name" \
   --outputDirectory=./PROJECT_NAME/
 ```
@@ -70,7 +70,7 @@ npx @querc/scffld@latest reg:parcel-react-app \
 To see all available options:
 
 ```sh
-npx @querc/scffld@latest reg:parcel-react-app --help
+npx @scffld/cli@latest reg:parcel-react-app --help
 ```
 
 <!-- @scffld-usage-end -->
@@ -86,7 +86,7 @@ dist
 ````md { filename: 'README.md' }
 # <!-- @scffld name -->
 
-> Created with [scffld](https://www.npmjs.com/package/@querc/scffld) and the [React web app template](https://github.com/scffld-dev/website/blob/main/templates/parcel-react-app.md)
+> Created with [scffld](https://www.npmjs.com/package/@scffld/cli) and the [React web app template](https://github.com/scffld-dev/website/blob/main/templates/parcel-react-app.md)
 
 ## Setup
 
@@ -139,7 +139,7 @@ Files will be in: `./dist/`
 <!-- @scffld packageManager --> run g:component -- --name="My Thing"
 ```
 
-Uses [scffld](https://www.npmjs.com/package/@querc/scffld) to generate React components
+Uses [scffld](https://www.npmjs.com/package/@scffld/cli) to generate React components
 
 To see all available options:
 
@@ -263,7 +263,7 @@ window.ResizeObserver = ResizeObserver;
   "devDependencies": {
     "@eslint/js": "^9.6.0",
     "@parcel/transformer-sass": "^2",
-    "@querc/scffld": "^1.4.0",
+    "@scffld/cli": "^1.6.1",
     /* @scffld-if includeTests */
     "@testing-library/dom": "^10.2.0",
     "@testing-library/jest-dom": "^6.4.6",

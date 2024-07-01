@@ -2,7 +2,7 @@
 import { Divider, Grid, Skeleton, Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
 import { GithubIcon } from '@mantinex/dev-icons';
-import * as scffld from '@querc/scffld';
+import * as scffld from '@scffld/cli';
 import markdownit, { Token } from 'markdown-it';
 
 import './Template.scss';
@@ -18,7 +18,7 @@ export type TemplateProps = {
 export const Template: React.FC<TemplateProps> = (props) => {
   const { name, template, params } = props;
 
-  const usageCommand = `npx @querc/scffld reg:${name}`;
+  const usageCommand = `npx @scffld/cli reg:${name}`;
   let hasUsage = false;
 
   const usageStartComment = '<!-- @scffld-usage-start -->';

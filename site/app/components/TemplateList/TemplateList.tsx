@@ -1,7 +1,7 @@
 'use client';
 import { Table } from '@mantine/core';
 import Link from 'next/link';
-import * as scffld from '@querc/scffld';
+import * as scffld from '@scffld/cli';
 
 import './TemplateList.scss';
 

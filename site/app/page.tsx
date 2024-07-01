@@ -23,7 +23,7 @@ export default function HomePage() {
 
               <Text className="description" mt={30}>
                 A curated collection of templates for{' '}
-                <a href="https://www.npmjs.com/package/@querc/scffld">scffld</a>
+                <a href="https://www.npmjs.com/package/@scffld/cli">scffld</a>
                 .<br />
                 Get the boilerplate out of the way &amp; focus on the things
                 that matter.
@@ -31,7 +31,7 @@ export default function HomePage() {
               <div className="ctas">
                 <Button
                   component="a"
-                  href="https://www.npmjs.com/package/@querc/scffld"
+                  href="https://www.npmjs.com/package/@scffld/cli"
                   variant="gradient"
                   gradient={{ from: 'purple', to: 'magenta' }}
                   size="xl"
