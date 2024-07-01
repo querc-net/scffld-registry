@@ -1,0 +1,30 @@
+.social {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  a {
+    transition: transform 0.15s ease-in-out;
+
+    &:hover,
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+
+  .npm {
+    color: #cb3837;
+  }
+
+  .github {
+    color: black;
+    [data-mantine-color-scheme='dark'] & {
+      color: #fff;
+    }
+  }
+
+  .mastodon {
+    color: #6364ff;
+  }
+}

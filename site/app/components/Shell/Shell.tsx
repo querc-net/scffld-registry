@@ -1,19 +1,19 @@
 'use client';
 import React, { PropsWithChildren } from 'react';
 import Link from 'next/link';
-import {
-  AppShell,
-  Burger,
-  Group,
-  NavLink,
-  ScrollArea,
-  Skeleton,
-} from '@mantine/core';
+import { AppShell, Burger, Group, NavLink, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import {
+  IconBrandMastodon,
+  IconBrandNpm,
+  IconBrandGithub,
+} from '@tabler/icons-react';
 
 import { Logo } from '../Logo/Logo';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
+
+import './Shell.scss';
 
 export type ShellProps = {} & PropsWithChildren;
 
@@ -38,6 +38,21 @@ export const Shell: React.FC<ShellProps> = (props) => {
           <Link href="/">
             <Logo />
           </Link>
+          <div className="social">
+            <Link href="https://www.npmjs.com/org/scffld" className="npm">
+              <IconBrandNpm size={32} aria-label="NPM" />
+            </Link>
+            <Link href="https://github.com/scffld-dev" className="github">
+              <IconBrandGithub size={32} aria-label="GitHub" />
+            </Link>
+            <Link
+              rel="me"
+              href="https://mastodon.social/@scffld"
+              className="mastodon"
+            >
+              <IconBrandMastodon size={32} aria-label="Mastodon" />
+            </Link>
+          </div>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
