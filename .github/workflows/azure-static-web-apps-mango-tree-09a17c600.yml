@@ -42,6 +42,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
       - run: corepack enable
+      - run: ls -lah templates
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Build And Deploy
