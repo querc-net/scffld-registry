@@ -8,6 +8,7 @@ import markdownit, { Token } from 'markdown-it';
 import './Template.scss';
 import React, { useEffect, useState } from 'react';
 import { getLastUpdated } from './getLastUpdated';
+import { getFileSize } from './getFileSize';
 
 export type TemplateProps = {
   name: string;
@@ -82,6 +83,8 @@ export const Template: React.FC<TemplateProps> = (props) => {
       setLastUpdated(x);
     });
   }, []);
+
+  const templateSize = getFileSize(template);
 
   return (
     <div className="template">
@@ -256,6 +259,9 @@ export const Template: React.FC<TemplateProps> = (props) => {
             {!lastUpdated && <Skeleton height="1rem" width="200px" />}
             {lastUpdated && lastUpdated.toISOString()}
           </p>
+
+          <h3>Template size</h3>
+          <p>{templateSize}</p>
         </Grid.Col>
       </Grid>
     </div>
