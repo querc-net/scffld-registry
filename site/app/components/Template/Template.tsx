@@ -74,7 +74,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
     });
   }
 
-  const codeUrl = `https://github.com/querc-net/scffld-registry/blob/main/templates/${name}.md`;
+  const codeUrl = `https://github.com/scffld-dev/website/blob/main/templates/${name}.md`;
 
   const [lastUpdated, setLastUpdated] = useState<Date>();
   useEffect(() => {

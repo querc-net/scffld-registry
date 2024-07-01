@@ -44,7 +44,7 @@ postInstallMessage: |
 ## Usage:
 
 ```sh
-npx @querc/scffld@latest github:querc-net/scffld-registry/templates/parcel-web-app \
+npx @querc/scffld@latest github:scffld-dev/website/templates/parcel-web-app \
     --name="My Awesome Website" \
     -o ./my-project/src/
 ```

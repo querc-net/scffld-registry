@@ -86,7 +86,7 @@ dist
 ````md { filename: 'README.md' }
 # <!-- @scffld name -->
 
-> Created with [scffld](https://www.npmjs.com/package/@querc/scffld) and the [React web app template](https://github.com/querc-net/scffld-registry/blob/main/templates/parcel-react-app.md)
+> Created with [scffld](https://www.npmjs.com/package/@querc/scffld) and the [React web app template](https://github.com/scffld-dev/website/blob/main/templates/parcel-react-app.md)
 
 ## Setup
 
