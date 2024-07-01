@@ -1,12 +1,13 @@
 'use client';
-import { Divider, Grid, Table, Tabs } from '@mantine/core';
+import { Divider, Grid, Skeleton, Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
 import { GithubIcon } from '@mantinex/dev-icons';
 import * as scffld from '@querc/scffld';
 import markdownit, { Token } from 'markdown-it';
 
 import './Template.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getLastUpdated } from './getLastUpdated';
 
 export type TemplateProps = {
   name: string;
@@ -74,6 +75,13 @@ export const Template: React.FC<TemplateProps> = (props) => {
   }
 
   const codeUrl = `https://github.com/querc-net/scffld-registry/blob/main/templates/${name}.md`;
+
+  const [lastUpdated, setLastUpdated] = useState<Date>();
+  useEffect(() => {
+    getLastUpdated(name).then((x) => {
+      setLastUpdated(x);
+    });
+  }, []);
 
   return (
     <div className="template">
@@ -242,6 +250,12 @@ export const Template: React.FC<TemplateProps> = (props) => {
               </ul>
             </>
           )}
+
+          <h3>Last updated</h3>
+          <p>
+            {!lastUpdated && <Skeleton height="1rem" width="200px" />}
+            {lastUpdated && lastUpdated.toISOString()}
+          </p>
         </Grid.Col>
       </Grid>
     </div>
