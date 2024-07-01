@@ -10,13 +10,10 @@ See [templates documentation](https://github.com/lindsayevans/scffld/blob/develo
 
 ```sh
 npx @querc/scffld@latest # Ensure latest is installed
-npx @querc/scffld@latest generate ./src/ > templates/parcel-react-app.md
+npx @querc/scffld@latest generate ./src/ --basePath=src/ > templates/parcel-react-app.md
 ```
 
 4. Add any required params & directives to your template
-
-   > [!WARNING]
-   > All `filename`s will be prefixed with `src/`, so you'll probably want to strip those out
 
 5. Test your template - be sure to test out all options:
 
