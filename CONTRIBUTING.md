@@ -1,6 +1,6 @@
 # Contributing
 
-See [templates documentation](https://github.com/lindsayevans/scffld/blob/develop/docs/templates.md)
+See [templates documentation](https://github.com/scffld-dev/cli/blob/develop/docs/templates.md)
 
 ## Basic workflow
 

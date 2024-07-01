@@ -6,7 +6,7 @@ export default async function Page() {
       <h2>Docs</h2>
       <p>
         Proper docs are coming soon, but for now you can check out the{' '}
-        <Link href="https://github.com/lindsayevans/scffld/tree/develop/docs">
+        <Link href="https://github.com/scffld-dev/cli/tree/develop/docs">
           GitHub repo
         </Link>
         .
