@@ -26,7 +26,7 @@ export const Shell: React.FC<ShellProps> = (props) => {
     <AppShell
       header={{ height: { base: 64, md: 64, lg: 64 } }}
       navbar={{
-        width: { base: 200, md: 300 },
+        width: { base: 200, md: 200 },
         breakpoint: 'sm',
         collapsed: { mobile: !opened },
       }}
