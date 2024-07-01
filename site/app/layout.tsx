@@ -4,8 +4,6 @@ import PlausibleProvider from 'next-plausible';
 
 import { theme } from '../theme';
 
-import '@mantine/core/styles.css';
-import '@mantine/code-highlight/styles.css';
 import './layout.scss';
 import { Shell } from './components/Shell/Shell';
 

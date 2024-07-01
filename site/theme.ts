@@ -1,6 +1,8 @@
 'use client';
 
 import { MantineColorsTuple, createTheme } from '@mantine/core';
+import '@mantine/core/styles.css';
+import '@mantine/code-highlight/styles.css';
 
 const magenta: MantineColorsTuple = [
   '#ffe9f6',
