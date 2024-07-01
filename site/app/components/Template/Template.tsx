@@ -3,9 +3,10 @@ import { Divider, Grid, Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
 import { GithubIcon } from '@mantinex/dev-icons';
 import * as scffld from '@querc/scffld';
-import markdownit from 'markdown-it';
+import markdownit, { Token } from 'markdown-it';
 
 import './Template.scss';
+import React from 'react';
 
 export type TemplateProps = {
   name: string;
@@ -24,6 +25,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
   const usageStartCommentPosition = template.indexOf(usageStartComment);
   const usageEndCommentPosition = template.indexOf(usageEndComment);
   let usageMarkup = '';
+  let usageElements: React.JSX.Element[] = [];
 
   if (usageStartCommentPosition > 0 && usageEndCommentPosition > 0) {
     hasUsage = true;
@@ -36,8 +38,22 @@ export const Template: React.FC<TemplateProps> = (props) => {
       .replace('# ', '## ');
 
     const md = markdownit();
-    usageMarkup = md.render(usageMarkdown);
-    // TODO: Need to replace code blocks with <CodeHighlight>
+    // usageMarkup = md.render(usageMarkdown);
+    const usageMarkdownParsed = md.parse(usageMarkdown, {});
+    usageElements = usageMarkdownParsed
+      .map((token, i) => {
+        let el = <p>{token.content}</p>;
+        if (i > 1 && usageMarkdownParsed[i - 1].type === 'heading_open') {
+          el = <h4>{token.content}</h4>;
+        }
+
+        if (token.type === 'fence' && token.tag === 'code') {
+          el = <CodeHighlight code={token.content} language={token.info} />;
+        }
+
+        return el;
+      })
+      .filter((x) => x !== null);
   }
 
   const postInstallCode = [];
@@ -80,12 +96,13 @@ export const Template: React.FC<TemplateProps> = (props) => {
 
               {!hasUsage && <h3>Usage</h3>}
               {!hasUsage && <CodeHighlight code={usageCommand} language="sh" />}
-              {hasUsage && (
+              {/* {hasUsage && (
                 <div
                   className="usage"
                   dangerouslySetInnerHTML={{ __html: usageMarkup }}
                 ></div>
-              )}
+              )} */}
+              {hasUsage && <div className="usage">{usageElements}</div>}
             </Tabs.Panel>
             <Tabs.Panel value="params">
               {params.outputDirectory && (
