@@ -9,9 +9,9 @@
     "preserve": "pnpm build",
     "serve": "serve -l 3333 ./dist",
     "lint": "next lint",
-    "g:component": "scffld reg:react-component --includeTests=false --outputDirectory=./site/app/components/",
-    "g:provider": "scffld reg:react-provider --includeTests=false --outputDirectory=./site/app/providers/",
-    "g:hook": "scffld reg:react-hook --includeTests=false --outputDirectory=./site/app/hooks/"
+    "g:component": "scffld reg:react-component --includeTests=false --outputDirectory=./app/components/",
+    "g:provider": "scffld reg:react-provider --includeTests=false --outputDirectory=./app/providers/",
+    "g:hook": "scffld reg:react-hook --includeTests=false --outputDirectory=./app/hooks/"
   },
   "dependencies": {
     "@mantine/code-highlight": "^7.11.0",
