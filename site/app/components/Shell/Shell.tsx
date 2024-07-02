@@ -29,15 +29,15 @@ export const Shell: React.FC<ShellProps> = (props) => {
     <AppShell
       header={{ height: { base: 64, md: 64, lg: 64 } }}
       navbar={{
-        width: { base: 200, md: 240 },
-        breakpoint: 'sm',
+        width: { base: 240 },
+        breakpoint: 'md',
         collapsed: { mobile: !opened },
       }}
       padding="md"
     >
       <AppShell.Header>
         <Group h="100%" px="md">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Link href="/">
             <Logo />
           </Link>

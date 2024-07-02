@@ -98,7 +98,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
   return (
     <div className="template">
       <Grid>
-        <Grid.Col span={9}>
+        <Grid.Col span={{ base: 12, md: 9, lg: 10 }}>
           <Tabs defaultValue="overview">
             <Tabs.List>
               <Tabs.Tab value="overview">Overview</Tabs.Tab>
@@ -220,7 +220,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
             </Tabs.Panel>
           </Tabs>
         </Grid.Col>
-        <Grid.Col span={3} className="metadata">
+        <Grid.Col span={{ base: 12, md: 3, lg: 2 }} className="metadata">
           {params.keywords && (
             <>
               <h3>Keywords</h3>

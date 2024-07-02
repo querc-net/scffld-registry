@@ -1,7 +1,13 @@
 .template-name {
   display: flex;
+  flex-direction: column;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.25rem;
+
+  @media (min-width: 62em) {
+    flex-direction: row;
+    gap: 1rem;
+  }
 
   small {
     color: #ccc;
