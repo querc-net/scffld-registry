@@ -86,6 +86,15 @@ export const Template: React.FC<TemplateProps> = (props) => {
 
   const templateSize = getFileSize(template);
 
+  const maxFiles = template.match(/```[^\s]+ {\s?filename:\s?'/gi)?.length;
+  let minFiles = maxFiles;
+  const conditionalFiles = template.match(
+    /```[^\s]+ {[^,]+,\s?condition: /gi
+  )?.length;
+  if (maxFiles !== undefined && conditionalFiles !== undefined) {
+    minFiles = maxFiles - conditionalFiles;
+  }
+
   return (
     <div className="template">
       <Grid>
@@ -262,6 +271,11 @@ export const Template: React.FC<TemplateProps> = (props) => {
 
           <h3>Template size</h3>
           <p>{templateSize}</p>
+
+          <h3>Files created</h3>
+          <p>
+            {minFiles === maxFiles ? minFiles : `${minFiles} - ${maxFiles}`}
+          </p>
         </Grid.Col>
       </Grid>
     </div>
