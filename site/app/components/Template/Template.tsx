@@ -132,20 +132,6 @@ export const Template: React.FC<TemplateProps> = (props) => {
                 </>
               )}
 
-              {postInstallCode.length > 0 && (
-                <>
-                  <h3>Post install</h3>
-                  <p>
-                    <CodeHighlightTabs
-                      withExpandButton
-                      defaultExpanded={false}
-                      withCopyButton={false}
-                      code={postInstallCode}
-                    />
-                  </p>
-                </>
-              )}
-
               <h3>Props</h3>
               {params.props && (
                 <Table
@@ -204,6 +190,20 @@ export const Template: React.FC<TemplateProps> = (props) => {
                       ))}
                   </Table.Tbody>
                 </Table>
+              )}
+
+              {postInstallCode.length > 0 && (
+                <>
+                  <h3>Post install</h3>
+                  <p>
+                    <CodeHighlightTabs
+                      withExpandButton
+                      defaultExpanded={false}
+                      withCopyButton={false}
+                      code={postInstallCode}
+                    />
+                  </p>
+                </>
               )}
             </Tabs.Panel>
             <Tabs.Panel value="raw">
