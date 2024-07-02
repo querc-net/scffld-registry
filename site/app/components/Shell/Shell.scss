@@ -28,3 +28,18 @@
     color: #6364ff;
   }
 }
+
+.mantine-AppShell-navbar {
+  a:link,
+  a:visited {
+    color: #4b5165;
+
+    svg {
+      color: #818494;
+    }
+
+    [data-mantine-color-scheme='dark'] & {
+      color: #f3f3fe;
+    }
+  }
+}

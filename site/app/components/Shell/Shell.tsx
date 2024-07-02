@@ -7,6 +7,9 @@ import {
   IconBrandMastodon,
   IconBrandNpm,
   IconBrandGithub,
+  IconTerminal2,
+  IconBooks,
+  IconMarkdown,
 } from '@tabler/icons-react';
 
 import { Logo } from '../Logo/Logo';
@@ -26,7 +29,7 @@ export const Shell: React.FC<ShellProps> = (props) => {
     <AppShell
       header={{ height: { base: 64, md: 64, lg: 64 } }}
       navbar={{
-        width: { base: 200, md: 200 },
+        width: { base: 200, md: 240 },
         breakpoint: 'sm',
         collapsed: { mobile: !opened },
       }}
@@ -63,15 +66,24 @@ export const Shell: React.FC<ShellProps> = (props) => {
           ))} */}
         <AppShell.Section grow component={ScrollArea}>
           <NavLink
-            href="/templates"
-            label="Templates"
+            href="/cli"
+            label="CLI"
             variant="light"
+            leftSection={<IconTerminal2 size="24px" />}
+            active={path.startsWith('/cli')}
+          />
+          <NavLink
+            href="/templates"
+            label="Template registry"
+            variant="light"
+            leftSection={<IconMarkdown size="24px" />}
             active={path.startsWith('/templates')}
           />
           <NavLink
             href="/docs"
             label="Docs"
             variant="light"
+            leftSection={<IconBooks size="24px" />}
             active={path.startsWith('/docs')}
           />
         </AppShell.Section>

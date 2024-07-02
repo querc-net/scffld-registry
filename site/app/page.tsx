@@ -31,7 +31,7 @@ export default function HomePage() {
               <div className="ctas">
                 <Button
                   component="a"
-                  href="https://www.npmjs.com/package/@scffld/cli"
+                  href="/cli"
                   variant="gradient"
                   gradient={{ from: 'purple', to: 'magenta' }}
                   size="xl"
