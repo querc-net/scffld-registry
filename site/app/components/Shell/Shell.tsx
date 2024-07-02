@@ -42,18 +42,18 @@ export const Shell: React.FC<ShellProps> = (props) => {
             <Logo />
           </Link>
           <div className="social">
-            <Link href="https://www.npmjs.com/org/scffld" className="npm">
-              <IconBrandNpm size={32} aria-label="NPM" />
-            </Link>
-            <Link href="https://github.com/scffld-dev" className="github">
-              <IconBrandGithub size={32} aria-label="GitHub" />
-            </Link>
             <Link
               rel="me"
               href="https://mastodon.social/@scffld"
               className="mastodon"
             >
               <IconBrandMastodon size={32} aria-label="Mastodon" />
+            </Link>
+            <Link href="https://github.com/scffld-dev" className="github">
+              <IconBrandGithub size={32} aria-label="GitHub" />
+            </Link>
+            <Link href="https://www.npmjs.com/org/scffld" className="npm">
+              <IconBrandNpm size={32} aria-label="NPM" />
             </Link>
           </div>
         </Group>
