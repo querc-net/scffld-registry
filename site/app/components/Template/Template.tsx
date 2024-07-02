@@ -1,14 +1,17 @@
 'use client';
 import { Divider, Grid, Skeleton, Table, Tabs } from '@mantine/core';
 import { CodeHighlight, CodeHighlightTabs } from '@mantine/code-highlight';
+import { notifications } from '@mantine/notifications';
+
 import { GithubIcon } from '@mantinex/dev-icons';
 import * as scffld from '@scffld/cli';
-import markdownit, { Token } from 'markdown-it';
+import markdownit from 'markdown-it';
 
 import './Template.scss';
 import React, { useEffect, useState } from 'react';
 import { getLastUpdated } from './getLastUpdated';
 import { getFileSize } from './getFileSize';
+import { useClipboard } from '@mantine/hooks';
 
 export type TemplateProps = {
   name: string;
@@ -95,6 +98,24 @@ export const Template: React.FC<TemplateProps> = (props) => {
     minFiles = maxFiles - conditionalFiles;
   }
 
+  const { copy, copied } = useClipboard();
+  const [copiedParameter, setCopiedParameter] = useState<string>();
+
+  useEffect(() => {
+    if (copied) {
+      notifications.show({
+        color: 'teal',
+        title: 'Param copied',
+        message: `Param \`--${copiedParameter}\` was copied to the clipboard`,
+      });
+    }
+  }, [copied]);
+
+  const onParamsRowClick = (param: string) => {
+    setCopiedParameter(param);
+    copy('--' + param);
+  };
+
   return (
     <div className="template">
       <Grid>
@@ -150,7 +171,10 @@ export const Template: React.FC<TemplateProps> = (props) => {
                   <Table.Tbody>
                     {params.props &&
                       Object.keys(params.props).map((prop) => (
-                        <Table.Tr key={prop}>
+                        <Table.Tr
+                          key={prop}
+                          onClick={() => onParamsRowClick(prop)}
+                        >
                           <Table.Th>
                             {prop}
                             {params.props && params.props[prop].required && (

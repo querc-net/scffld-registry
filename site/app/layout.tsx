@@ -1,5 +1,7 @@
 import React from 'react';
 import { MantineProvider, ColorSchemeScript, Container } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+
 import PlausibleProvider from 'next-plausible';
 
 import { theme } from '../theme';
@@ -25,6 +27,7 @@ export default function RootLayout({ children }: { children: any }) {
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <PlausibleProvider domain="scffld.dev" trackOutboundLinks={true}>
+            <Notifications />
             <Shell>
               <Container fluid py={0}>
                 {children}
