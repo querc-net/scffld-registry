@@ -1,6 +1,7 @@
 import { Container, Title, Text, Button } from '@mantine/core';
 
 import './page.scss';
+import { InlineCodeHighlight } from '@mantine/code-highlight';
 
 export default function HomePage() {
   return (
@@ -22,11 +23,13 @@ export default function HomePage() {
               </Title>
 
               <Text className="description" mt={30}>
-                A curated collection of templates for{' '}
-                <a href="https://www.npmjs.com/package/@scffld/cli">scffld</a>
-                .<br />
-                Get the boilerplate out of the way &amp; focus on the things
-                that matter.
+                <strong>scffld</strong> is a simple code scaffolding tool
+                utilising a single Markdown file to define templates &
+                properties
+                <br />
+                <br />
+                Spend less time copy &amp; pasting, more time{' '}
+                <InlineCodeHighlight code="coding" lang="ts" />
               </Text>
               <div className="ctas">
                 <Button
