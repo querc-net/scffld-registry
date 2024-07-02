@@ -95,3 +95,39 @@ $mantine-breakpoint-md: 62em;
     }
   }
 }
+
+.typing {
+  display: inline-flex;
+  justify-content: flex-start;
+
+  code {
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+    padding-right: 4px;
+    border-right: 0.2em solid var(--mantine-color-magenta-5);
+    white-space: nowrap;
+    letter-spacing: 0;
+    animation: typing 5s steps(6, end) 2s infinite,
+      blink-caret 0.75s step-end infinite;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  10% {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--mantine-color-magenta-5);
+  }
+}

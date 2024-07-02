@@ -29,7 +29,10 @@ export default function HomePage() {
                 <br />
                 <br />
                 Spend less time copy &amp; pasting, more time{' '}
-                <InlineCodeHighlight code="coding" lang="ts" />
+                <span className="typing">
+                  <code>coding</code>
+                </span>
+                {/* <InlineCodeHighlight code="coding" lang="ts" /> */}
               </Text>
               <div className="ctas">
                 <Button
