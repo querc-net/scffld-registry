@@ -123,6 +123,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
           <Tabs defaultValue="overview">
             <Tabs.List>
               <Tabs.Tab value="overview">Overview</Tabs.Tab>
+              <Tabs.Tab value="preview">Preview</Tabs.Tab>
               <Tabs.Tab value="params">Params</Tabs.Tab>
               <Tabs.Tab value="raw">Raw template</Tabs.Tab>
             </Tabs.List>
@@ -144,6 +145,12 @@ export const Template: React.FC<TemplateProps> = (props) => {
                 ></div>
               )} */}
               {hasUsage && <div className="usage">{usageElements}</div>}
+            </Tabs.Panel>
+            <Tabs.Panel value="preview">
+              <h3>Coming soon!</h3>
+              <p>
+                Tweak params to see what files would be scaffolded in real-time
+              </p>
             </Tabs.Panel>
             <Tabs.Panel value="params">
               {params.outputDirectory && (
