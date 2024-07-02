@@ -264,9 +264,13 @@ export const Template: React.FC<TemplateProps> = (props) => {
           )}
 
           <h3>Last updated</h3>
-          <p>
+          <p title={lastUpdated && lastUpdated.toISOString()}>
             {!lastUpdated && <Skeleton height="1rem" width="200px" />}
-            {lastUpdated && lastUpdated.toISOString()}
+            {lastUpdated &&
+              new Intl.DateTimeFormat(undefined, {
+                dateStyle: 'long',
+                timeZone: 'Australia/Sydney',
+              }).format(lastUpdated)}
           </p>
 
           <h3>Template size</h3>
