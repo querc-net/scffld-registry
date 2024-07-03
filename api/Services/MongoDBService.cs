@@ -65,7 +65,8 @@ public class MongoDBService
                 {
                     { "_id", 0 },
                     { "totalCount", 1 },
-                    { "previousWeek", 1 }
+                    { "previousWeek.date", 1 },
+                    { "previousWeek.count", 1 }
                 }),
         };
 
@@ -77,7 +78,7 @@ public class MongoDBService
 
     public async Task IncrementCountAsync(string template)
     {
-        var today = DateTime.Now.Date;
+        var today = DateTime.Now.ToUniversalTime().Date;
 
         var builder = Builders<TemplateCount>.Filter;
         var filter = builder.Eq("template", template) & builder.Eq("date", today);

@@ -12,5 +12,5 @@ public class TemplateStats
 
     [BsonElement("previousWeek")]
     [JsonPropertyName("previousWeek")]
-    public List<TemplateCount> PreviousWeek { get; set; } = null!;
+    public List<TemplateDayStat> PreviousWeek { get; set; } = null!;
 }
