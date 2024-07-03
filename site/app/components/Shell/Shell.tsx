@@ -10,6 +10,7 @@ import {
   IconTerminal2,
   IconBooks,
   IconMarkdown,
+  IconMail,
 } from '@tabler/icons-react';
 
 import { Logo } from '../Logo/Logo';
@@ -33,6 +34,7 @@ export const Shell: React.FC<ShellProps> = (props) => {
         breakpoint: 'md',
         collapsed: { mobile: !opened },
       }}
+      footer={{ height: 60 }}
       padding="md"
     >
       <AppShell.Header>
@@ -92,6 +94,21 @@ export const Shell: React.FC<ShellProps> = (props) => {
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Footer p="md">
+        <p>
+          Created by <a href="https://github.com/lindsayevans">Lindsay Evans</a>
+        </p>
+        <ul>
+          <li>
+            <IconMail size={24} aria-label="Email" />
+            <a href="mailto:hi@scffld.dev">hi@scffld.dev</a>
+          </li>
+          <li>
+            <IconBrandMastodon size={24} aria-label="Mastodon" />
+            <a href="https://mastodon.social/@scffld">@scffld</a>
+          </li>
+        </ul>
+      </AppShell.Footer>
     </AppShell>
   );
 };
