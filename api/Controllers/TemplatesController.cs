@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using api.Services;
+using api.Models;
 
 namespace api.Controllers;
 
@@ -14,14 +16,36 @@ public class TemplatesController : ControllerBase
     private readonly HttpClient _client;
     private readonly IMemoryCache _memoryCache;
     private readonly IConfiguration _configuration;
+    private readonly MongoDBService _mongoDBService;
 
 
-    public TemplatesController(ILogger<TemplatesController> logger, IMemoryCache memoryCache, IConfiguration configuration)
+    public TemplatesController(ILogger<TemplatesController> logger, IMemoryCache memoryCache, IConfiguration configuration, MongoDBService mongoDBService)
     {
         _logger = logger;
         _memoryCache = memoryCache;
         _configuration = configuration;
+        _mongoDBService = mongoDBService;
+
         _client = new HttpClient();
+    }
+
+
+    [HttpGet("{template}")]
+    public async Task<ActionResult<TemplateCount>> GetTemplateCount(string template)
+    {
+        // return await _mongoDBService.GetTotalCountAsync(template);
+
+        TemplateCount templateCount;
+        if (!_memoryCache.TryGetValue(template, out templateCount))
+        {
+            templateCount = await _mongoDBService.GetTotalCountAsync(template);
+
+            _memoryCache.Set(template, templateCount,
+                new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("CacheExpiration") ?? 3600)));
+        }
+
+        return Ok(templateCount);
     }
 
     [HttpGet(Name = "GetTemplate")]
