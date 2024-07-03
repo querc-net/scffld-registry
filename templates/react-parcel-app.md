@@ -62,7 +62,7 @@ Highly opinionated template for creating a React app using Parcel.js
 ## Usage
 
 ```sh
-npx @scffld/cli@latest reg:parcel-react-app \
+npx @scffld/cli@latest reg:react-parcel-app \
   --name="Your Project Name" \
   --outputDirectory=./PROJECT_NAME/
 ```
@@ -70,7 +70,7 @@ npx @scffld/cli@latest reg:parcel-react-app \
 To see all available options:
 
 ```sh
-npx @scffld/cli@latest reg:parcel-react-app --help
+npx @scffld/cli@latest reg:react-parcel-app --help
 ```
 
 <!-- @scffld-usage-end -->
@@ -86,7 +86,7 @@ dist
 ````md { filename: 'README.md' }
 # <!-- @scffld name -->
 
-> Created with [scffld](https://www.npmjs.com/package/@scffld/cli) and the [React web app template](https://github.com/scffld-dev/website/blob/main/templates/parcel-react-app.md)
+> Created with [scffld](https://www.npmjs.com/package/@scffld/cli) and the [React web app template](https://github.com/scffld-dev/website/blob/main/templates/react-parcel-app.md)
 
 ## Setup
 

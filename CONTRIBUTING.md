@@ -10,7 +10,7 @@ See [templates documentation](https://github.com/scffld-dev/cli/blob/develop/doc
 
 ```sh
 npx @scffld/cli@latest # Ensure latest is installed
-npx @scffld/cli@latest generate ./src/ --basePath=src/ > templates/parcel-react-app.md
+npx @scffld/cli@latest generate ./src/ --basePath=src/ > templates/react-parcel-app.md
 ```
 
 4. Add any required params & directives to your template
@@ -18,9 +18,9 @@ npx @scffld/cli@latest generate ./src/ --basePath=src/ > templates/parcel-react-
 5. Test your template - be sure to test out all options:
 
 ```sh
-npx @scffld/cli@latest templates/parcel-react-app.md
-npx @scffld/cli@latest templates/parcel-react-app.md --outputDirectory=./test-src/ --name="My Test Thing" --packageManager=pnpm
-npx @scffld/cli@latest templates/parcel-react-app.md --outputDirectory=./test-src/ --name="My Test Thing" --packageManager=yarn --includeTests=false --includeRouter=false --includeMantine=false --includeFonts=false --includeIcons=false
+npx @scffld/cli@latest templates/react-parcel-app.md
+npx @scffld/cli@latest templates/react-parcel-app.md --outputDirectory=./test-src/ --name="My Test Thing" --packageManager=pnpm
+npx @scffld/cli@latest templates/react-parcel-app.md --outputDirectory=./test-src/ --name="My Test Thing" --packageManager=yarn --includeTests=false --includeRouter=false --includeMantine=false --includeFonts=false --includeIcons=false
 ```
 
 ## Best practices
@@ -30,7 +30,7 @@ npx @scffld/cli@latest templates/parcel-react-app.md --outputDirectory=./test-sr
 - Include usage instructions, e.g:
 
 ```sh
-npx @scffld/cli@latest reg:parcel-react-app \
+npx @scffld/cli@latest reg:react-parcel-app \
     --outputDirectory=./PROJECT_NAME/
 ```
 
