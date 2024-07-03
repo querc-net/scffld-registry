@@ -41,7 +41,7 @@ export const Shell: React.FC<ShellProps> = (props) => {
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
           <Link href="/">
-            <Logo />
+            <Logo variant="full" />
           </Link>
           <div className="social">
             <Link

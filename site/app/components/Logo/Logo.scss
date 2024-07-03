@@ -3,3 +3,9 @@
     display: block;
   }
 }
+
+[data-mantine-color-scheme='dark'] {
+  .logo-text {
+    fill: #aaadb8;
+  }
+}
