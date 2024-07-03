@@ -1,7 +1,9 @@
 import { Container, Title, Text, Button } from '@mantine/core';
+import { InlineCodeHighlight } from '@mantine/code-highlight';
+
+import { QuickstartCode } from './components/QuickstartCode/QuickstartCode';
 
 import './page.scss';
-import { InlineCodeHighlight } from '@mantine/code-highlight';
 
 export default function HomePage() {
   return (
@@ -17,46 +19,69 @@ export default function HomePage() {
                   variant="gradient"
                   gradient={{ from: 'purple', to: 'magenta' }}
                 >
-                  Simplify
+                  Simplified
                 </Text>{' '}
-                your code generation &amp; scaffolding
+                code scaffolding
               </Title>
 
-              <Text className="description" mt={30}>
-                <strong>scffld</strong> is a simple code scaffolding tool
-                utilising a single Markdown file to define templates &
-                properties
+              <Text className="description">
+                <strong>scffld</strong> is a Node.js based code scaffolding
+                tool, with all code templates defined in a single file
                 <br />
                 <br />
                 Spend less time copy &amp; pasting, more time{' '}
                 <span className="typing">
                   <code>coding</code>
                 </span>
-                {/* <InlineCodeHighlight code="coding" lang="ts" /> */}
               </Text>
-              <div className="ctas">
-                <Button
-                  component="a"
-                  href="/cli"
-                  variant="gradient"
-                  gradient={{ from: 'purple', to: 'magenta' }}
-                  size="xl"
-                  className="control"
-                  mt={40}
-                >
-                  Get started
-                </Button>
-                <Button
-                  variant="outline"
-                  component="a"
-                  href="/templates"
-                  size="xl"
-                  className="browse"
-                  mt={40}
-                >
-                  Browse templates
-                </Button>
-              </div>
+              <Text className="description">
+                <h3>Quickstart</h3>
+                <p>
+                  Ensure you have <a href="https://nodejs.org/">Node</a> v18+
+                  installed and run the following:
+                </p>
+                <QuickstartCode />
+                <p>
+                  ...now take a look at the file it created:{' '}
+                  <InlineCodeHighlight
+                    code="hello/Hello_FooBar.txt"
+                    language="txt"
+                  />
+                </p>
+              </Text>
+              <Text className="description">
+                <h3>Where to from here?</h3>
+                <div className="ctas">
+                  {/* <Button
+                    component="a"
+                    href="/cli"
+                    variant="gradient"
+                    gradient={{ from: 'purple', to: 'magenta' }}
+                    size="xl"
+                    className="control"
+                  >
+                    Get started
+                  </Button> */}
+                  <Button
+                    variant="outline"
+                    component="a"
+                    href="/docs"
+                    size="lg"
+                    className="browse"
+                  >
+                    Read the docs
+                  </Button>
+                  <Button
+                    variant="outline"
+                    component="a"
+                    href="/templates"
+                    size="lg"
+                    className="browse"
+                  >
+                    Browse templates
+                  </Button>
+                </div>
+              </Text>
             </div>
             <div className="attribution">
               Photo by{' '}
@@ -71,8 +96,6 @@ export default function HomePage() {
           </div>
         </Container>
       </div>
-      {/* <p>[Hero]</p> */}
-      {/* <p>[Features]</p> */}
     </>
   );
 }

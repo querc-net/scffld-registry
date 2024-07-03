@@ -1,31 +1,40 @@
+$mantine-breakpoint-md: 62em;
+
 .social {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
 
-  a {
-    transition: transform 0.15s ease-in-out;
+  a:link,
+  a:visited {
+    color: #808496;
+    transition: all 0.15s ease-in-out;
+
+    [data-mantine-color-scheme='dark'] & {
+      color: #a9adb9;
+    }
 
     &:hover,
     &:active {
       transform: scale(1.1);
+
+      &.npm {
+        color: #cb3837;
+      }
+
+      &.github {
+        color: black;
+
+        [data-mantine-color-scheme='dark'] & {
+          color: #fff;
+        }
+      }
+
+      &.mastodon {
+        color: #6364ff;
+      }
     }
-  }
-
-  .npm {
-    color: #cb3837;
-  }
-
-  .github {
-    color: black;
-    [data-mantine-color-scheme='dark'] & {
-      color: #fff;
-    }
-  }
-
-  .mastodon {
-    color: #6364ff;
   }
 }
 
@@ -49,6 +58,20 @@
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: $mantine-breakpoint-md) {
+    font-size: 0.875rem;
+  }
+
+  a:link,
+  a:visited,
+  svg {
+    color: #4a5167;
+
+    [data-mantine-color-scheme='dark'] & {
+      color: #f3f3fe;
+    }
+  }
+
   ul {
     display: flex;
     align-items: center;
@@ -56,6 +79,10 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+
+    @media (max-width: $mantine-breakpoint-md) {
+      gap: 0.5rem;
+    }
 
     li {
       display: flex;
