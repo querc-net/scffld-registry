@@ -2,6 +2,7 @@ using api.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Driver.Core.Events;
 
 namespace api.Services;
 
@@ -13,6 +14,18 @@ public class MongoDBService
 
     public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
     {
+        // var mongoConnectionUrl = new MongoUrl(mongoDBSettings.Value.ConnectionURI);
+        // var mongoClientSettings = MongoClientSettings.FromUrl(mongoConnectionUrl);
+        // mongoClientSettings.ClusterConfigurator = cb =>
+        // {
+        //     cb.Subscribe<CommandStartedEvent>(e =>
+        //     {
+        //         // logger.LogInformation($"{e.CommandName} - {e.Command.ToJson()}");
+        //         Console.WriteLine($"{e.CommandName} - {e.Command.ToJson()}");
+        //     });
+        // };
+        // var client = new MongoClient(mongoClientSettings);
+
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _templateStatsCollection = database.GetCollection<TemplateStats>(mongoDBSettings.Value.CollectionName);
@@ -21,12 +34,6 @@ public class MongoDBService
 
     public async Task<TemplateStats> GetTotalCountAsync(string template)
     {
-        // var filter = Builders<TemplateStats>.Filter
-        //     .Eq(templateCount => templateCount.Template, template);
-        // var templateCount = await _templateStatsCollection.Find(filter).FirstOrDefaultAsync();
-
-        // var pipeline = new BsonArray
-        // var pipeline = new[]
         PipelineDefinition<TemplateStats, TemplateStats> pipeline = new[]
         {
             new BsonDocument("$match",
@@ -38,12 +45,28 @@ public class MongoDBService
                     { "totalCount",
                         new BsonDocument("$sum", "$count") }
                 }),
+            new BsonDocument("$lookup",
+            new BsonDocument
+                {
+                    { "from", "template-counts" },
+                    { "localField", "_id" },
+                    { "foreignField", "template" },
+                    { "pipeline",
+            new BsonArray
+                    {
+                        new BsonDocument("$match",
+                        new BsonDocument("date",
+                        new BsonDocument("$gte", DateTime.Now.AddDays(-7))))
+                    } },
+                    { "as", "previousWeek" }
+                }),
             new BsonDocument("$project",
             new BsonDocument
                 {
                     { "_id", 0 },
-                    { "totalCount", 1 }
-                })
+                    { "totalCount", 1 },
+                    { "previousWeek", 1 }
+                }),
         };
 
         var cursor = await _templateStatsCollection.AggregateAsync(pipeline);

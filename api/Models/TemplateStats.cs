@@ -9,4 +9,8 @@ public class TemplateStats
     [BsonElement("totalCount")]
     [JsonPropertyName("totalCount")]
     public Int64? TotalCount { get; set; }
+
+    [BsonElement("previousWeek")]
+    [JsonPropertyName("previousWeek")]
+    public List<TemplateCount> PreviousWeek { get; set; } = null!;
 }
