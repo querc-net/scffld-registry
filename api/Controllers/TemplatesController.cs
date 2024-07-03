@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 
 namespace api.Controllers;
 
@@ -12,12 +13,14 @@ public class TemplatesController : ControllerBase
     private readonly ILogger<TemplatesController> _logger;
     private readonly HttpClient _client;
     private readonly IMemoryCache _memoryCache;
+    private readonly IConfiguration _configuration;
 
 
-    public TemplatesController(ILogger<TemplatesController> logger, IMemoryCache memoryCache)
+    public TemplatesController(ILogger<TemplatesController> logger, IMemoryCache memoryCache, IConfiguration configuration)
     {
         _logger = logger;
         _memoryCache = memoryCache;
+        _configuration = configuration;
         _client = new HttpClient();
     }
 
@@ -35,10 +38,10 @@ public class TemplatesController : ControllerBase
         string template;
         if (!_memoryCache.TryGetValue(url, out template))
         {
-            template = await this._client.GetStringAsync(url);
+            template = await _client.GetStringAsync(url);
             _memoryCache.Set(url, template,
                 new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(15)));
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("CacheExpiration") ?? 3600)));
         }
 
         return Ok(template);
