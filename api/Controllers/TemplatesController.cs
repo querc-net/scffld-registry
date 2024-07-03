@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using api.Services;
 using api.Models;
 
@@ -31,11 +29,9 @@ public class TemplatesController : ControllerBase
 
 
     [HttpGet("{template}")]
-    public async Task<ActionResult<TemplateCount>> GetTemplateCount(string template)
+    public async Task<ActionResult<TemplateStats>> GetTemplateStats(string template)
     {
-        // return await _mongoDBService.GetTotalCountAsync(template);
-
-        TemplateCount templateCount;
+        TemplateStats templateCount;
         if (!_memoryCache.TryGetValue(template, out templateCount))
         {
             templateCount = await _mongoDBService.GetTotalCountAsync(template);
@@ -53,7 +49,7 @@ public class TemplatesController : ControllerBase
     {
         var tasks = new[]
         {
-            Task.Run(() => UpdateCount(name))
+            Task.Run(() => _mongoDBService.IncrementCountAsync(name))
         };
 
         var url = $"https://raw.githubusercontent.com/scffld-dev/website/{revision}/templates/{name}.md";
@@ -69,12 +65,5 @@ public class TemplatesController : ControllerBase
         }
 
         return Ok(template);
-    }
-
-
-    // TODO: do it
-    async Task UpdateCount(string name)
-    {
-        // _logger.LogInformation($"TODO: update count for {name}", DateTime.UtcNow.ToLongTimeString());
     }
 }
