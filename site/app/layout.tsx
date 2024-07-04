@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: any }) {
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <PlausibleProvider domain="scffld.dev" trackOutboundLinks={true}>
             <NextTopLoader
-              color="#4F23C0"
+              color="#f01879"
               height={4}
               showSpinner={false}
               shadow="none"
