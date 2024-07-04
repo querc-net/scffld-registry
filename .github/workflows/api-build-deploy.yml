@@ -25,5 +25,5 @@ jobs:
 
       - run: echo "IMAGE=${{ secrets.AZURE_ACR_DOMAIN }}/scffld/scffld-api" >> $GITHUB_ENV
       - run: echo "${{ secrets.AZURE_ACR_PASSWORD }}" | docker login "${{ secrets.AZURE_ACR_DOMAIN }}" -u "${{ secrets.AZURE_ACR_USERNAME }}" --password-stdin
-      - run: docker build -t ${{ env.IMAGE }}latest .
+      - run: docker build -t ${{ env.IMAGE }}:latest .
       - run: docker push ${{ env.IMAGE }}:latest
