@@ -25,6 +25,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+{
+    if (app.Environment.IsDevelopment())
+    {
+        builder.WithOrigins("http://localhost/*");
+    }
+    else
+    {
+        builder.WithOrigins("https://scffld.dev");
+    }
+}));
+
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
