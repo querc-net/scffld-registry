@@ -38,7 +38,7 @@ public class TemplatesController : ControllerBase
 
             _memoryCache.Set(template, templateCount,
                 new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("CacheExpiration") ?? 3600)));
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("StatsCacheExpiration") ?? 3600)));
         }
 
         return Ok(templateCount);
@@ -61,7 +61,7 @@ public class TemplatesController : ControllerBase
             template = await _client.GetStringAsync(url);
             _memoryCache.Set(url, template,
                 new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("CacheExpiration") ?? 3600)));
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("TemplateCacheExpiration") ?? 3600)));
         }
 
         return Ok(template);
