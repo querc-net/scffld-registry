@@ -1,4 +1,10 @@
 a:link,
 a:visited {
   color: #f01879;
+  transition: color 0.15s ease-in-out;
+}
+
+a:hover,
+a:active {
+  color: #683dd9;
 }

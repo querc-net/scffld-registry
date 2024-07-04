@@ -97,7 +97,7 @@ export default function HomePage() {
           </div>
         </Container>
       </div>
-      {/* <FeaturesCards /> */}
+      <FeaturesCards />
     </>
   );
 }

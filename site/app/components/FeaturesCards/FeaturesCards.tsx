@@ -1,6 +1,5 @@
 'use client';
 import {
-  Badge,
   Group,
   Title,
   Text,
@@ -9,32 +8,36 @@ import {
   Container,
   rem,
   useMantineTheme,
+  Button,
 } from '@mantine/core';
 import {
-  IconCloudComputing,
-  IconTerminal2,
-  IconCode,
+  IconRocket,
+  IconCodeDots,
+  IconAffiliate,
+  IconArrowRight,
+  IconBooks,
 } from '@tabler/icons-react';
 
 import classes from './FeaturesCards.module.css';
 
 const mockdata = [
   {
+    title: 'Super fast scaffolding',
+    description:
+      'scffld is quick - <500ms for remote templates and <100ms for local',
+    icon: IconRocket,
+  },
+  {
     title: 'Local or remote templates',
     description:
       'Include templates in your codebase, provide them on GitHub, or use <a href="/templates">the registry</a>',
-    icon: IconCloudComputing,
+    icon: IconAffiliate,
   },
   {
-    title: 'Interactive mode',
-    description: 'Prompts the user for missing properties',
-    icon: IconTerminal2,
-  },
-  {
-    title: 'Any language',
+    title: 'Reverse engineer existing code',
     description:
-      'Templates can be written in any language you want:<br />HTML, XML, CSS, SCSS, JavaScript, TypeScript, Python, Ruby, PHP, ColdFusion, COBOL...',
-    icon: IconCode,
+      'Use the <a href="https://github.com/scffld-dev/cli/blob/develop/docs/generator.md">generate</a> command to easily create a template from your existing source code',
+    icon: IconCodeDots,
   },
 ];
 
@@ -87,6 +90,18 @@ export function FeaturesCards() {
       <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
         {features}
       </SimpleGrid>
+
+      <Group justify="center" mt={32}>
+        <Button
+          component="a"
+          href="https://github.com/scffld-dev/cli/blob/develop/docs/usage.md"
+          variant="light"
+          leftSection={<IconBooks size={24} />}
+          rightSection={<IconArrowRight size={14} />}
+        >
+          View usage for more features
+        </Button>
+      </Group>
     </Container>
   );
 }
