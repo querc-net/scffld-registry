@@ -16,6 +16,16 @@ builder.Services.AddSingleton<MongoDBService>();
 
 builder.Logging.AddConsole();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,23 +35,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
-{
-    if (app.Environment.IsDevelopment())
-    {
-        builder.WithOrigins("http://localhost/*");
-    }
-    else
-    {
-        builder.WithOrigins("https://scffld.dev");
-    }
-}));
+app.UseCors("AllowAll");
 
-app.UseCors();
+// app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+// app.UseAuthorization();
 
 app.MapControllers();
 
