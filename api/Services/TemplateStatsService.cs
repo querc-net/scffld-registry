@@ -65,6 +65,11 @@ public class TemplateStatsService
         var listResult = await cursor.ToListAsync();
         var stats = listResult.FirstOrDefault();
 
+        if (stats == null)
+        {
+            return new TemplateStats();
+        }
+
         // Previous week stats
         PipelineDefinition<TemplateDayStat, TemplateDayStat> previousWeekPipeline = new[]
         {
@@ -87,7 +92,7 @@ public class TemplateStatsService
         var previousWeekCursor = await _templateDayStatsCollection.AggregateAsync(previousWeekPipeline);
         var previousWeekResult = await previousWeekCursor.ToListAsync();
 
-        if (previousWeekResult != null)
+        if (stats != null && previousWeekResult != null)
         {
             stats.PreviousWeek = previousWeekResult;
         }
