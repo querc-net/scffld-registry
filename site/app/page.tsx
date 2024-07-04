@@ -4,6 +4,7 @@ import { InlineCodeHighlight } from '@mantine/code-highlight';
 import { QuickstartCode } from './components/QuickstartCode/QuickstartCode';
 
 import './page.scss';
+import { FeaturesCards } from './components/FeaturesCards/FeaturesCards';
 
 export default function HomePage() {
   return (
@@ -96,6 +97,7 @@ export default function HomePage() {
           </div>
         </Container>
       </div>
+      {/* <FeaturesCards /> */}
     </>
   );
 }

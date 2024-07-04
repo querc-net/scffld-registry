@@ -19,7 +19,7 @@ export const QuickstartCode: React.FC = () => {
         {
           fileName: 'cmd',
           code: `npx @scffld/cli reg:hello ^\n    --name="Foo Bar"`,
-          language: 'cmd',
+          language: 'sh',
           icon: <IconBrandWindows size={16} />,
         },
       ]}
