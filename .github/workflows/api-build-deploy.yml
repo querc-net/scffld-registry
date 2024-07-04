@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - feature/api
-    paths: 'api/**'
+    paths:
+      - '.github/workflows/api-build-deploy.yml'
+      - 'api/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
