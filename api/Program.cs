@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMemoryCache();
 
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-builder.Services.AddSingleton<MongoDBService>();
+builder.Services.AddSingleton<TemplateStatsService>();
 
 builder.Logging.AddConsole();
 

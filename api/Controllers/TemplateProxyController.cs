@@ -7,49 +7,33 @@ namespace api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TemplatesController : ControllerBase
+public class TemplateProxyController : ControllerBase
 {
 
-    private readonly ILogger<TemplatesController> _logger;
+    private readonly ILogger<TemplateProxyController> _logger;
     private readonly HttpClient _client;
     private readonly IMemoryCache _memoryCache;
     private readonly IConfiguration _configuration;
-    private readonly MongoDBService _mongoDBService;
+    private readonly TemplateStatsService _templateStatsService;
 
 
-    public TemplatesController(ILogger<TemplatesController> logger, IMemoryCache memoryCache, IConfiguration configuration, MongoDBService mongoDBService)
+    public TemplateProxyController(ILogger<TemplateProxyController> logger, IMemoryCache memoryCache, IConfiguration configuration, TemplateStatsService templateStatsService)
     {
         _logger = logger;
         _memoryCache = memoryCache;
         _configuration = configuration;
-        _mongoDBService = mongoDBService;
+        _templateStatsService = templateStatsService;
 
         _client = new HttpClient();
     }
 
-
-    [HttpGet("{template}")]
-    public async Task<ActionResult<TemplateStats>> GetTemplateStats(string template)
-    {
-        TemplateStats templateCount;
-        if (!_memoryCache.TryGetValue(template, out templateCount))
-        {
-            templateCount = await _mongoDBService.GetTotalCountAsync(template);
-
-            _memoryCache.Set(template, templateCount,
-                new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("StatsCacheExpiration") ?? 3600)));
-        }
-
-        return Ok(templateCount);
-    }
-
-    [HttpGet(Name = "GetTemplate")]
+    [HttpGet("{name}")]
+    [HttpGet("{name}/{revision?}")]
     public async Task<ActionResult<string>> Get(string name, string? revision = "HEAD")
     {
         var tasks = new[]
         {
-            Task.Run(() => _mongoDBService.IncrementCountAsync(name))
+            Task.Run(() => _templateStatsService.IncrementCountAsync(name))
         };
 
         var url = $"https://raw.githubusercontent.com/scffld-dev/website/{revision}/templates/{name}.md";

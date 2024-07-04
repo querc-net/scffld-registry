@@ -6,29 +6,15 @@ using MongoDB.Driver.Core.Events;
 
 namespace api.Services;
 
-public class MongoDBService
+public class TemplateStatsService
 {
 
     private readonly IMongoCollection<TemplateStats> _templateStatsCollection;
     private readonly IMongoCollection<TemplateDayStat> _templateDayStatsCollection;
     private readonly IMongoCollection<TemplateCount> _templateCountsCollection;
 
-    public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
+    public TemplateStatsService(IOptions<MongoDBSettings> mongoDBSettings)
     {
-        // var mongoConnectionUrl = new MongoUrl(mongoDBSettings.Value.ConnectionURI);
-        // var mongoClientSettings = MongoClientSettings.FromUrl(mongoConnectionUrl);
-        // mongoClientSettings.ClusterConfigurator = cb =>
-        // {
-        //     cb.Subscribe<CommandStartedEvent>(e =>
-        //     {
-        //         // logger.LogInformation($"{e.CommandName} - {e.Command.ToJson()}");
-        //         Console.WriteLine($"{e.CommandName} - {e.Command.ToJson()}");
-        //     });
-        // };
-        // var client = new MongoClient(mongoClientSettings);
-
-        Console.WriteLine($"Mongo: {mongoDBSettings.Value.ConnectionURI}");
-
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _templateStatsCollection = database.GetCollection<TemplateStats>(mongoDBSettings.Value.CollectionName);
