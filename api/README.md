@@ -12,3 +12,5 @@ cp .env.example .env
 docker build -t scffld-api .
 docker run --rm -p 8080:8080 --env-file ./.env scffld-api
 ```
+
+http://localhost:8080/Templates?name=react-hook
