@@ -14,6 +14,7 @@
     "g:hook": "scffld reg:react-hook --includeTests=false --outputDirectory=./app/hooks/"
   },
   "dependencies": {
+    "@mantine/charts": "^7.11.1",
     "@mantine/code-highlight": "^7.11.0",
     "@mantine/core": "7.11.0",
     "@mantine/hooks": "7.11.0",

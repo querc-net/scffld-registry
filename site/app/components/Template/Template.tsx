@@ -12,6 +12,9 @@ import React, { useEffect, useState } from 'react';
 import { getLastUpdated } from './getLastUpdated';
 import { getFileSize } from './getFileSize';
 import { useClipboard } from '@mantine/hooks';
+import { AreaChart } from '@mantine/charts';
+import { TemplateStats } from './TemplateStats';
+import { getStats } from './getStats';
 
 export type TemplateProps = {
   name: string;
@@ -116,10 +119,38 @@ export const Template: React.FC<TemplateProps> = (props) => {
     copy('--' + param);
   };
 
+  const [stats, setStats] = useState<TemplateStats>();
+  const [previousWeekData, setPreviousWeekData] =
+    useState<TemplateStats['previousWeek']>();
+  const dow = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  useEffect(() => {
+    getStats(name).then((stats) => {
+      if (stats) {
+        setStats(stats);
+
+        const previousWeek = new Array(7)
+          .fill(null)
+          .map((_, i) => {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            if (!stats.previousWeek[i]) {
+              return { date: dow[date.getDay()], count: 0 };
+            }
+            return {
+              date: dow[date.getDay()],
+              count: stats.previousWeek[i].count,
+            };
+          })
+          .reverse();
+        setPreviousWeekData(previousWeek);
+      }
+    });
+  }, []);
+
   return (
     <div className="template">
       <Grid>
-        <Grid.Col span={{ base: 12, md: 9, lg: 10 }}>
+        <Grid.Col span={{ base: 12, md: 9 }}>
           <Tabs defaultValue="overview">
             <Tabs.List>
               <Tabs.Tab value="overview">Overview</Tabs.Tab>
@@ -251,7 +282,7 @@ export const Template: React.FC<TemplateProps> = (props) => {
             </Tabs.Panel>
           </Tabs>
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 3, lg: 2 }} className="metadata">
+        <Grid.Col span={{ base: 12, md: 3 }} className="metadata">
           {params.keywords && (
             <>
               <h3>Keywords</h3>
@@ -303,6 +334,32 @@ export const Template: React.FC<TemplateProps> = (props) => {
                 timeZone: 'Australia/Sydney',
               }).format(lastUpdated)}
           </p>
+
+          <h3>Downloads</h3>
+          {!stats && <Skeleton height="140px" width="100%" />}
+          {stats && (
+            <>
+              <h4>Total</h4>
+              <p>{stats.totalCount || 0}</p>
+              {previousWeekData && (
+                <>
+                  <h4>Past week</h4>
+                  {/* <pre>{JSON.stringify(previousWeekData, null, 2)}</pre> */}
+                  <AreaChart
+                    h={100}
+                    data={previousWeekData}
+                    dataKey="date"
+                    series={[{ name: 'count', color: 'magenta.6' }]}
+                    withGradient={false}
+                    curveType="linear"
+                    tickLine="none"
+                    gridAxis="none"
+                    connectNulls
+                  />
+                </>
+              )}
+            </>
+          )}
 
           <h3>Template size</h3>
           <p>{templateSize}</p>
