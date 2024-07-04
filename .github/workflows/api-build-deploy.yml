@@ -1,0 +1,29 @@
+name: API CI/CD
+
+on:
+  push:
+    branches:
+      - feature/api
+    paths: 'api/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./api
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
+
+      - run: echo "IMAGE=${{ secrets.AZURE_ACR_DOMAIN }}/scffld/scffld-api" >> $GITHUB_ENV
+      - run: echo "${{ secrets.AZURE_ACR_PASSWORD }}" | docker login "${{ secrets.AZURE_ACR_DOMAIN }}" -u "${{ secrets.AZURE_ACR_USERNAME }}" --password-stdin
+      - run: docker build -t ${{ env.IMAGE }}latest .
+      - run: docker push ${{ env.IMAGE }}:latest
