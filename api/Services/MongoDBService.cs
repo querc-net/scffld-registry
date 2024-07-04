@@ -10,6 +10,7 @@ public class MongoDBService
 {
 
     private readonly IMongoCollection<TemplateStats> _templateStatsCollection;
+    private readonly IMongoCollection<TemplateDayStat> _templateDayStatsCollection;
     private readonly IMongoCollection<TemplateCount> _templateCountsCollection;
 
     public MongoDBService(IOptions<MongoDBSettings> mongoDBSettings)
@@ -26,9 +27,12 @@ public class MongoDBService
         // };
         // var client = new MongoClient(mongoClientSettings);
 
+        Console.WriteLine($"Mongo: {mongoDBSettings.Value.ConnectionURI}");
+
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _templateStatsCollection = database.GetCollection<TemplateStats>(mongoDBSettings.Value.CollectionName);
+        _templateDayStatsCollection = database.GetCollection<TemplateDayStat>(mongoDBSettings.Value.CollectionName);
         _templateCountsCollection = database.GetCollection<TemplateCount>(mongoDBSettings.Value.CollectionName);
     }
 
@@ -45,35 +49,64 @@ public class MongoDBService
                     { "totalCount",
                         new BsonDocument("$sum", "$count") }
                 }),
-            new BsonDocument("$lookup",
-            new BsonDocument
-                {
-                    { "from", "template-counts" },
-                    { "localField", "_id" },
-                    { "foreignField", "template" },
-                    { "pipeline",
-            new BsonArray
-                    {
-                        new BsonDocument("$match",
-                        new BsonDocument("date",
-                        new BsonDocument("$gte", DateTime.Now.AddDays(-7))))
-                    } },
-                    { "as", "previousWeek" }
-                }),
+            // Note: CosmosDB doesn't support $lookup with pipeline, so we'll need to run a separate query below to populate previousWeek
+            // new BsonDocument("$lookup",
+            // new BsonDocument
+            //     {
+            //         { "from", "template-counts" },
+            //         { "localField", "_id" },
+            //         { "foreignField", "template" },
+            //         { "pipeline",
+            // new BsonArray
+            //         {
+            //             new BsonDocument("$match",
+            //             new BsonDocument("date",
+            //             new BsonDocument("$gte", DateTime.Now.AddDays(-7))))
+            //         } },
+            //         { "as", "previousWeek" }
+            //     }),
             new BsonDocument("$project",
             new BsonDocument
                 {
                     { "_id", 0 },
                     { "totalCount", 1 },
-                    { "previousWeek.date", 1 },
-                    { "previousWeek.count", 1 }
+                    // { "previousWeek.date", 1 },
+                    // { "previousWeek.count", 1 }
                 }),
         };
 
         var cursor = await _templateStatsCollection.AggregateAsync(pipeline);
         var listResult = await cursor.ToListAsync();
+        var stats = listResult.FirstOrDefault();
 
-        return listResult.FirstOrDefault();
+        // Previous week stats
+        PipelineDefinition<TemplateDayStat, TemplateDayStat> previousWeekPipeline = new[]
+        {
+            new BsonDocument("$match",
+            new BsonDocument
+                {
+                    { "template", template },
+                    { "date",
+                        new BsonDocument("$gte", DateTime.Now.AddDays(-7)) }
+                }),
+            new BsonDocument("$project",
+            new BsonDocument
+                {
+                    { "_id", 0 },
+                    { "date", 1 },
+                    { "count", 1 }
+                }),
+        };
+
+        var previousWeekCursor = await _templateDayStatsCollection.AggregateAsync(previousWeekPipeline);
+        var previousWeekResult = await previousWeekCursor.ToListAsync();
+
+        if (previousWeekResult != null)
+        {
+            stats.PreviousWeek = previousWeekResult;
+        }
+
+        return stats;
     }
 
     public async Task IncrementCountAsync(string template)
