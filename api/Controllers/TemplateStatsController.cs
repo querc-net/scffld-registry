@@ -23,6 +23,22 @@ public class TemplateStatsController : ControllerBase
         _templateStatsService = templateStatsService;
     }
 
+    [HttpGet("")]
+    public async Task<ActionResult<List<TemplateStatsOverview>>> GetTemplateStatsOverview()
+    {
+        List<TemplateStatsOverview> templateStats;
+        if (!_memoryCache.TryGetValue("__stats-overview", out templateStats))
+        {
+            templateStats = await _templateStatsService.GetStatsOverviewAsync();
+
+            _memoryCache.Set("__stats-overview", templateStats,
+                new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(_configuration.GetValue<int?>("StatsCacheExpiration") ?? 3600)));
+        }
+
+        return Ok(templateStats);
+    }
+
     [HttpGet("{template}")]
     public async Task<ActionResult<TemplateStats>> GetTemplateStats(string template)
     {

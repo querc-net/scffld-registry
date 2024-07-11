@@ -9,6 +9,7 @@ namespace api.Services;
 public class TemplateStatsService
 {
 
+    private readonly IMongoCollection<TemplateStatsOverview> _templateStatsOverviewCollection;
     private readonly IMongoCollection<TemplateStats> _templateStatsCollection;
     private readonly IMongoCollection<TemplateDayStat> _templateDayStatsCollection;
     private readonly IMongoCollection<TemplateCount> _templateCountsCollection;
@@ -17,9 +18,41 @@ public class TemplateStatsService
     {
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
+        _templateStatsOverviewCollection = database.GetCollection<TemplateStatsOverview>(mongoDBSettings.Value.CollectionName);
         _templateStatsCollection = database.GetCollection<TemplateStats>(mongoDBSettings.Value.CollectionName);
         _templateDayStatsCollection = database.GetCollection<TemplateDayStat>(mongoDBSettings.Value.CollectionName);
         _templateCountsCollection = database.GetCollection<TemplateCount>(mongoDBSettings.Value.CollectionName);
+    }
+
+    public async Task<List<TemplateStatsOverview>> GetStatsOverviewAsync()
+    {
+        PipelineDefinition<TemplateStatsOverview, TemplateStatsOverview> pipeline = new[]
+        {
+            new BsonDocument("$group",
+            new BsonDocument
+                {
+                    { "_id", "$template" },
+                    { "count",
+                        new BsonDocument("$sum", "$count") }
+                }),
+            new BsonDocument("$sort",
+            new BsonDocument
+                {
+                    { "count", -1 },
+                }),
+            new BsonDocument("$project",
+            new BsonDocument
+                {
+                    { "_id", 0 },
+                    { "template", "$_id" },
+                    { "count", 1 },
+                }),
+        };
+
+        var cursor = await _templateStatsOverviewCollection.AggregateAsync(pipeline);
+        var listResult = await cursor.ToListAsync();
+
+        return listResult;
     }
 
     public async Task<TemplateStats> GetTotalCountAsync(string template)
